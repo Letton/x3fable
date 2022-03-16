@@ -1,7 +1,7 @@
 import styles from "../styles/Home.module.css";
 import Layout from "./components/Layout";
 import Header from "./components/Header";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import fetchJson from "../lib/fetchJSON";
 
 export default function Login() {
@@ -26,15 +26,13 @@ export default function Login() {
       <Header />
       <main className={styles.main}>
         <div className="container">
-          <form>
+          <form onSubmit={(e) => loginHandler(e)}>
             <input type="text" onChange={(e) => setLogin(e.target.value)} />
             <input
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit" onClick={(e) => loginHandler(e)}>
-              Зайти
-            </button>
+            <button type="submit">Зайти</button>
           </form>
         </div>
       </main>

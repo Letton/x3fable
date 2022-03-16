@@ -3,46 +3,47 @@ import styles from "../../styles/Header.module.css";
 
 export default function Header() {
   return (
-    <header>
-      <div className="container">
-        <nav className={styles.navBar}>
-          <h1>X3Fable</h1>
-          <ul>
+    <header className={styles.header}>
+      <nav className={styles.navBar}>
+        <ul>
+          <li>
+            <Link href="/updates">
+              <a>Обновления</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/about">
+              <a>Wiki</a>
+            </Link>
+          </li>
+          <li>
             <Link href="/">
               <a>
-                <li>Главная</li>
+                <h1>X3Fable</h1>
               </a>
             </Link>
+          </li>
+          <li>
             <Link href="/about">
+              <a>Об игре</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/account">
               <a>
-                <li>Об Игре</li>
+                <span
+                  style={{
+                    marginRight: "0.5rem",
+                  }}
+                >
+                  Аккаунт
+                </span>
+                <i className="uil uil-user"></i>
               </a>
             </Link>
-            <Link href="/wiki">
-              <a>
-                <li>Wiki</li>
-              </a>
-            </Link>
-          </ul>
-          <Link href="/download">
-            <a
-              style={{
-                fontWeight: "600",
-                fontSize: "1.25em",
-              }}
-            >
-              <span
-                style={{
-                  marginRight: "0.5em",
-                }}
-              >
-                Скачать
-              </span>
-              <i className="uil uil-import"></i>
-            </a>
-          </Link>
-        </nav>
-      </div>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }

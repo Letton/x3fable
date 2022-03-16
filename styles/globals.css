@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "Comic_CAT";
+  src: url("/fonts/Comic_CAT.otf");
+}
+
+@font-face {
+  font-family: "AvertaDemoPE";
+  src: url("/fonts/AvertaDemoPE.ttf");
+}
+
 html,
 body {
   padding: 0;
@@ -20,4 +30,15 @@ a {
   margin: 0 auto;
   padding: 0 1rem;
   max-width: 1024px;
+}
+
+hr {
+  margin: 2rem 0 0 0;
+  background: #e3b152;
+  border: none;
+  height: 2px;
+}
+
+section {
+  overflow: auto;
 }
