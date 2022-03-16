@@ -1,13 +1,23 @@
+.header {
+  background: #e3b152;
+  color: #36240e;
+  padding: 1rem 0;
+}
+
 .navBar {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1320px;
+  font-family: Comic_CAT;
 }
 
 .navBar ul {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -16,9 +26,11 @@
 
 .navBar li {
   padding: 0 1rem;
+  font-size: 1.25rem;
 }
 
-.navBar h1 {
+.navBar li h1 {
+  padding: 0 1rem;
+  font-size: 1.25rem;
   margin: 0;
-  padding: 1rem 0;
 }
