@@ -2,21 +2,20 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Layout from "./components/Layout";
 import Header from "./components/Header";
-// Import Swiper React components
+import screenshot_1 from "../public/img/screenshot_1.jpg";
+import screenshot_2 from "../public/img/screenshot_2.jpg";
+import screenshot_3 from "../public/img/screenshot_3.jpg";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-// Import Swiper styles
+
 import "swiper/css";
 
 export default function Home() {
-  const myLoader = () => {
-    return `https://dummyimage.com/600x400/#111/fff`;
-  };
-
   return (
     <Layout>
       <Header />
@@ -43,46 +42,35 @@ export default function Home() {
             >
               <SwiperSlide>
                 <Image
-                  loader={myLoader}
-                  src="https://dummyimage.com/600x400/#111/fff"
+                  src={screenshot_1}
                   alt="Screenshot"
                   width={600}
                   height={400}
                   layout="responsive"
                   unoptimized
+                  placeholder="blur"
                 ></Image>
               </SwiperSlide>
               <SwiperSlide>
                 <Image
-                  loader={myLoader}
-                  src="https://dummyimage.com/600x400/#111/fff"
+                  src={screenshot_2}
                   alt="Screenshot"
                   width={600}
                   height={400}
                   layout="responsive"
                   unoptimized
+                  placeholder="blur"
                 ></Image>
               </SwiperSlide>
               <SwiperSlide>
                 <Image
-                  loader={myLoader}
-                  src="https://dummyimage.com/600x400/#111/fff"
+                  src={screenshot_3}
                   alt="Screenshot"
                   width={600}
                   height={400}
                   layout="responsive"
                   unoptimized
-                ></Image>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image
-                  loader={myLoader}
-                  src="https://dummyimage.com/600x400/#111/fff"
-                  alt="Screenshot"
-                  width={600}
-                  height={400}
-                  layout="responsive"
-                  unoptimized
+                  placeholder="blur"
                 ></Image>
               </SwiperSlide>
             </Swiper>
