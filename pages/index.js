@@ -14,6 +14,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 import "swiper/css";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -103,11 +104,7 @@ export default function Home() {
           </section>
         </div>
       </main>
-      <footer className={styles.footer}>
-        <div className={styles.all_rights}>
-          {new Date().getFullYear()} Все права игнорированы
-        </div>
-      </footer>
+      <Footer />
     </Layout>
   );
 }
