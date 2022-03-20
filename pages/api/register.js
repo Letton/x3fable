@@ -43,23 +43,14 @@ export default async function handler(req, res) {
     });
   }
   const hashPassword = await bcrypt.hash(password, 5);
-  const hashEmail = encodeURI(await bcrypt.hash(email, 5));
-  const user = await PendingUser.create({
-    login,
-    email,
-    password: hashPassword,
-    hash: hashEmail,
-  });
   const token = jwt.sign(
-    { login: req.body.login, role: user.role },
+    { login: login, email, password: hashPassword },
     process.env.SECRET,
     {
-      expiresIn: "24h",
+      expiresIn: "1h",
     }
   );
-  console.log(email);
-  console.log(hashEmail);
-  await sendConfirmationEmail(email, hashEmail);
+  await sendConfirmationEmail(email, token);
   res.setHeader(
     "Set-Cookie",
     serialize("token", token, { path: "/", maxAge: 60 * 60 * 24 })

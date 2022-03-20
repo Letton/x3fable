@@ -64,7 +64,7 @@ export default function Register() {
               Зарегистрироваться
             </button>
             <Link href="/account/login">
-              <a>Войти</a>
+              <a className={styles.alt_link}>Войти</a>
             </Link>
           </form>
         </div>
