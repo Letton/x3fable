@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import Layout from "./components/Layout";
-import Header from "./components/Header";
+import Layout from "../components/Layout";
+import Header from "../components/Header";
 import screenshot_1 from "../public/img/screenshot_1.jpg";
 import screenshot_2 from "../public/img/screenshot_2.jpg";
 import screenshot_3 from "../public/img/screenshot_3.jpg";
@@ -14,7 +14,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 import "swiper/css";
-import Footer from "./components/Footer";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (

@@ -1,34 +1,35 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Layout from "../components/Layout";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import Layout from "../../components/Layout";
 import styles from "../../styles/Account.module.css";
 import fetchJson from "../../lib/fetchJSON";
-import { useState } from "react";
+import { useRouter } from "next/router";
 import jwt from "jsonwebtoken";
 
 export default function Account({ data }) {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const registerHandler = async (e) => {
-    e.preventDefault();
-    console.log(login);
-    console.log(password);
-    await fetchJson("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        login,
-        password,
-      }),
+  const logoutHandler = async () => {
+    const res = await fetchJson("/api/logout", {
+      method: "GET",
     });
+    if (res.status === "ok") {
+      router.push("/account/login");
+    }
   };
-
   return (
     <Layout>
       <Header />
       <main className={styles.main}>
-        <div className={styles.form_wrapper}>{data.login}</div>
+        <div className={styles.form_wrapper}>
+          <div className={styles.account_data}>
+            <div>Login: {data.login}</div>
+            <div>Email: {data.email}</div>
+          </div>
+          <button className={styles.button} onClick={logoutHandler}>
+            Выйти
+          </button>
+        </div>
       </main>
       <Footer />
     </Layout>

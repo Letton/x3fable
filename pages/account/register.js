@@ -1,6 +1,6 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Layout from "../components/Layout";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import Layout from "../../components/Layout";
 import styles from "../../styles/Account.module.css";
 import fetchJson from "../../lib/fetchJSON";
 import Link from "next/link";
@@ -60,7 +60,7 @@ export default function Register() {
               id="password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit" className={styles.submit_button}>
+            <button type="submit" className={styles.button}>
               Зарегистрироваться
             </button>
             <Link href="/account/login">

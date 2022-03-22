@@ -9,6 +9,15 @@ const User = sequelize.define("user", {
   role: { type: DataTypes.STRING, defaultValue: "user" },
 });
 
+const Сomment = sequelize.define("comment", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  updateId: { type: DataTypes.INTEGER },
+  text: { type: DataTypes.STRING },
+});
+
+User.hasMany(Сomment);
+Сomment.belongsTo(User);
+
 module.exports = {
   User,
 };

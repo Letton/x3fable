@@ -1,7 +1,7 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Layout from "../components/Layout";
-import styles from "../../styles/Account.module.css";
+import Footer from "../../../components/Footer";
+import Header from "../../../components/Header";
+import Layout from "../../../components/Layout";
+import styles from "../../../styles/Account.module.css";
 
 export default function Activate({ message }) {
   return (
@@ -16,7 +16,7 @@ export default function Activate({ message }) {
 }
 
 export async function getServerSideProps({ params }) {
-  const { User } = require("../../models");
+  const { User } = require("../../../models");
   const jwt = require("jsonwebtoken");
   const { token } = params;
   try {

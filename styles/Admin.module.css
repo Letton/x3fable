@@ -1,0 +1,25 @@
+.main {
+  min-height: 100vh;
+  background: #35230d;
+  color: #ecc981;
+}
+
+.wrapper {
+  padding: 2rem 0;
+}
+
+.button:active {
+  background-color: #ffc65c;
+}
+
+.button {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-family: AvertaDemoPE;
+  background: #e3b152;
+  color: #36240e;
+  border: none;
+  font-size: 1.25rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}

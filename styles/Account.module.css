@@ -34,7 +34,11 @@
   border-radius: 0.5rem;
 }
 
-.submit_button {
+.button:active {
+  background-color: #69461b;
+}
+
+.button {
   display: block;
   padding: 0.5rem 1rem;
   font-family: AvertaDemoPE;
@@ -43,12 +47,7 @@
   border: none;
   font-size: 1.25rem;
   border-radius: 1rem;
-  margin-bottom: 1rem;
   cursor: pointer;
-}
-
-.submit_button:active {
-  background-color: #69461b;
 }
 
 .alt_link {
@@ -56,4 +55,8 @@
   width: 100%;
   text-align: right;
   text-decoration: underline;
+}
+
+.account_data {
+  margin-bottom: 1rem;
 }
