@@ -5,7 +5,7 @@ const { parse } = require("url");
 const sequelize = require("./db");
 const models = require("./models");
 const next = require("next");
-
+console.log(process.env.HOST);
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
 const port = 3000;
