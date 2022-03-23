@@ -16,6 +16,7 @@ DB_HOST=localhost
 DB_PORT=5432
 GOOGLE_USER="Ваша почта"
 GOOGLE_PASSWORD="Ваш пароль от почты, сгенерированный в паролях приложений Google"
+HOST=localhost:3000
 ```
 
 Установите зависимости проекта
