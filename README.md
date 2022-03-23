@@ -1,5 +1,7 @@
 # Getting Started
 
+Установите Postgres
+
 Измените файл `.env`
 
 ```sh
@@ -7,10 +9,10 @@ NODE_ENV=development <- "Изменить на production"
 SECRET=7ytraRf7SmkqdGa6MN9KnEAWFyXm9jumue8fswVSXMXHwpsG
 DB_NAME=app
 DB_USER=postgres
-DB_PASSWORD=admin
+DB_PASSWORD="Пароль от базы данных"
 DB_HOST=localhost
 DB_PORT=5432
-GOOGLE_USER=lettonchannel@gmail.com
+GOOGLE_USER="Ваша почта"
 GOOGLE_PASSWORD="Ваш пароль от почты, сгенерированный в паролях приложений Google"
 ```
 
