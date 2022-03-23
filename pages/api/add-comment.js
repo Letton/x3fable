@@ -18,22 +18,25 @@ export default async function handler(req, res) {
       message: "Авторизируйтесь чтобы добавить комментарий",
     });
   }
-  const commentCondidate = await Commentary.findOne({
+  const commentCandidate = await Commentary.findOne({
     where: {
       userId: user.id,
     },
     order: [["updatedAt", "DESC"]],
   });
-  if (commentCondidate.updatedAt.getTime() + 60 * 1000 <= Date.now()) {
-    const comment = await Commentary.create({
-      text: commentText,
-      updateId: updateId,
-      userId: user.id,
+  if (
+    commentCandidate &&
+    commentCandidate.updatedAt.getTime() + 60 * 1000 > Date.now()
+  ) {
+    return res.status(400).json({
+      status: "error",
+      message: "Вы можете осталять комментарий раз в минуту",
     });
-    return res.status(200).json({ status: "ok" });
   }
-  return res.status(400).json({
-    status: "error",
-    message: "Вы можете осталять комментарий раз в минуту",
+  const comment = await Commentary.create({
+    text: commentText,
+    updateId: updateId,
+    userId: user.id,
   });
+  return res.status(200).json({ status: "ok" });
 }
