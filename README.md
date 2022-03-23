@@ -2,12 +2,14 @@
 
 Установите Postgres
 
+Создайте базу данных
+
 Измените файл `.env`
 
 ```sh
 NODE_ENV=development <- "Изменить на production"
 SECRET=7ytraRf7SmkqdGa6MN9KnEAWFyXm9jumue8fswVSXMXHwpsG
-DB_NAME=app
+DB_NAME="Название базы данных"
 DB_USER=postgres
 DB_PASSWORD="Пароль от базы данных"
 DB_HOST=localhost
