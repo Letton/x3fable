@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   } catch {
     return res.status(400).json({
       status: "error",
-      message: "Авторизируйтесь чтобы добавить комментарий",
+      message: "Авторизируйтесь, чтобы добавить комментарий",
     });
   }
   const commentCandidate = await Commentary.findOne({
