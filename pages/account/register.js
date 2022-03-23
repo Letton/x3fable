@@ -1,22 +1,23 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
+import Modal from "../../components/Modal";
 import styles from "../../styles/Account.module.css";
-import fetchJson from "../../lib/fetchJSON";
+import fetchJson from "../../lib/fetchJson";
 import Link from "next/link";
+
 import { useState } from "react";
 
 export default function Register() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [modalActive, setModalActive] = useState(false);
+  const [modalContent, setModalContent] = useState({ title: null, text: null });
 
   const registerHandler = async (e) => {
     e.preventDefault();
-    console.log(login);
-    console.log(email);
-    console.log(password);
-    await fetchJson("/api/register", {
+    const response = await fetchJson("/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -25,6 +26,28 @@ export default function Register() {
         password,
       }),
     });
+    if (response.status == "ok") {
+      setModalActive(true);
+      setModalContent({
+        title: "Супер!",
+        text: "На ваш почтовый адрес было выслано письмо для активации аккаунта",
+      });
+      return;
+    }
+    if (response.status == "error") {
+      setModalActive(true);
+      setModalContent({
+        title: "Ошибка",
+        text: response.message,
+      });
+      return;
+    }
+    setModalActive(true);
+    setModalContent({
+      title: "Ошибка",
+      text: "Неизвестная ошибка",
+    });
+    return;
   };
 
   return (
@@ -70,6 +93,12 @@ export default function Register() {
         </div>
       </main>
       <Footer />
+      <Modal
+        active={modalActive}
+        setActive={setModalActive}
+        title={modalContent.title}
+        text={modalContent.text}
+      />
     </Layout>
   );
 }

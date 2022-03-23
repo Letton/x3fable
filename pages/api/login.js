@@ -4,7 +4,6 @@ import { User } from "../../models";
 import bcrypt from "bcrypt";
 
 export default async function handler(req, res) {
-  console.log(req.body);
   const { login, password } = req.body;
   if (!login || !password) {
     return res.status(400).json({
@@ -22,7 +21,7 @@ export default async function handler(req, res) {
     });
   }
   const token = jwt.sign(
-    { login: user.login, email: user.email, role: user.role },
+    { id: user.id, login: user.login, email: user.email, role: user.role },
     process.env.SECRET,
     {
       expiresIn: "24h",

@@ -13,7 +13,6 @@ const validateEmail = (email) => {
 };
 
 export default async function handler(req, res) {
-  console.log(req.body);
   const { login, email, password } = req.body;
   if (!login || !email || !password) {
     return res.status(400).json({

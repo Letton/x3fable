@@ -2,9 +2,10 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
 import styles from "../../styles/Account.module.css";
-import fetchJson from "../../lib/fetchJSON";
+import fetchJson from "../../lib/fetchJson";
 import { useRouter } from "next/router";
 import jwt from "jsonwebtoken";
+import Modal from "../../components/Modal";
 
 export default function Account({ data }) {
   const router = useRouter();

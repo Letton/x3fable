@@ -21,13 +21,13 @@
   text-align: center;
 }
 
-article:nth-child(even) .update_descrition {
+article:nth-child(even) .update_text {
   margin-right: 3rem;
   font-family: AvertaDemoPE;
   font-size: 1.25rem;
 }
 
-article:nth-child(even) .update_title {
+.article:nth-child(even) h1 {
   font-family: Comic_CAT;
 }
 
@@ -36,15 +36,14 @@ article:nth-child(even) .update_author {
   text-align-last: right;
 }
 
-article:nth-child(odd) .update_descrition {
-  margin-right: 3rem;
-  font-family: AvertaDemoPE;
-  font-size: 1.25rem;
-  text-align: right;
+.article:nth-child(odd) h1 {
+  font-family: Comic_CAT;
 }
 
-article:nth-child(odd) .update_title {
-  font-family: Comic_CAT;
+article:nth-child(odd) .update_text {
+  margin-left: 3rem;
+  font-family: AvertaDemoPE;
+  font-size: 1.25rem;
   text-align: right;
 }
 
@@ -53,6 +52,15 @@ article:nth-child(odd) .update_author {
   text-align-last: left;
 }
 
-.update_article {
-  padding: 1rem 0;
+.article {
+  padding: 2rem 0;
+}
+
+.alt_link {
+  display: block;
+  text-decoration: underline;
+  font-family: Comic_CAT;
+  font-size: 1.5rem;
+  padding: 1rem 0 2rem 0;
+  text-align: center;
 }

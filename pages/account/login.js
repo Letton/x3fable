@@ -1,8 +1,9 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
+import Modal from "../../components/Modal";
 import styles from "../../styles/Account.module.css";
-import fetchJson from "../../lib/fetchJSON";
+import fetchJson from "../../lib/fetchJson";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -10,12 +11,15 @@ import { useState } from "react";
 export default function Login() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [modalActive, setModalActive] = useState(false);
+  const [modalContent, setModalContent] = useState({ title: null, text: null });
+
   const router = useRouter();
   const registerHandler = async (e) => {
     e.preventDefault();
     console.log(login);
     console.log(password);
-    const res = await fetchJson("/api/login", {
+    const response = await fetchJson("/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -23,9 +27,24 @@ export default function Login() {
         password,
       }),
     });
-    if (res.status === "ok") {
+    if (response.status === "ok") {
       router.push("/account");
+      return;
     }
+    if (response.status == "error") {
+      setModalActive(true);
+      setModalContent({
+        title: "Ошибка",
+        text: response.message,
+      });
+      return;
+    }
+    setModalActive(true);
+    setModalContent({
+      title: "Ошибка",
+      text: "Неизвестная ошибка",
+    });
+    return;
   };
 
   return (
@@ -62,6 +81,12 @@ export default function Login() {
         </div>
       </main>
       <Footer />
+      <Modal
+        active={modalActive}
+        setActive={setModalActive}
+        title={modalContent.title}
+        text={modalContent.text}
+      />
     </Layout>
   );
 }

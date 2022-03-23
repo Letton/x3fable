@@ -1,0 +1,36 @@
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal_content {
+  position: relative;
+  padding: 2rem;
+  background: #e3b152;
+  width: 100%;
+  max-width: 425px;
+  font-family: AvertaDemoPE;
+  color: #36240e;
+  border-radius: 1rem;
+}
+
+.close {
+  text-align: right;
+  position: absolute;
+  top: 15px;
+  right: 18px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}

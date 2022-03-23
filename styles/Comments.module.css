@@ -1,37 +1,48 @@
-.main {
-  height: calc(100vh - 55px);
-  background: #35230d;
-  color: #ecc981;
+.form {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
+  width: 100%;
 }
 
-.form_wrapper {
-  padding: 2rem;
-  background: #e3b152;
-  color: #36240e;
+.comment {
+  padding: 0.15rem 0 0 0;
   font-family: AvertaDemoPE;
-  width: 320px;
-  border-radius: 1rem;
+}
+
+.comments {
+  margin-bottom: 2rem;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.commentsTitle {
+  font-size: 1.75rem;
+  font-family: Comic_CAT;
+}
+
+.commentsWrapper {
+  background: #483012;
+  border: 5px solid #160d04;
+  padding: 1rem 1rem;
 }
 
 .label {
   display: block;
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
+  font-family: AvertaDemoPE;
 }
 
 .input {
-  padding: 0.3rem;
+  display: block;
+  padding: 0.4rem;
   border: none;
   outline: none;
-  margin-bottom: 1rem;
-  width: 100%;
   background: #36240e;
-  color: #e3b152;
+  color: #ecc981;
   padding: 0.5rem;
   border-radius: 0.5rem;
+  width: calc(100% - 250px);
+  font-family: AvertaDemoPE;
 }
 
 .button:active {
@@ -43,21 +54,16 @@
   padding: 0.5rem 1rem;
   font-family: AvertaDemoPE;
   background: #36240e;
-  color: #e3b152;
+  color: #ecc981;
   border: none;
-  font-size: 1.25rem;
+  font-size: 1rem;
   border-radius: 1rem;
   cursor: pointer;
 }
 
 .alt_link {
-  margin-top: 1rem;
   display: block;
   width: 100%;
   text-align: right;
   text-decoration: underline;
-}
-
-.account_data {
-  margin-bottom: 1rem;
 }
