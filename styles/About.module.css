@@ -1,0 +1,20 @@
+.main {
+  min-height: 100vh;
+  background: #35230d;
+  color: #ecc981;
+  overflow: auto;
+}
+
+.title {
+  font-size: 2rem;
+  text-align: center;
+  padding: 2rem 0;
+  font-family: Comic_CAT;
+}
+
+.description {
+  font-family: AvertaDemoPE;
+  font-size: 1.25rem;
+  padding: 0 3rem;
+  text-align: center;
+}

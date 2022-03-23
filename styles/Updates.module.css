@@ -1,24 +1,24 @@
-.container {
-  padding: 0 2rem;
-}
-
 .main {
+  min-height: 100vh;
   background: #35230d;
   color: #ecc981;
+  overflow: auto;
 }
 
-.title {
+.article h1 {
+  margin-top: 0;
+  font-size: 1.75rem;
+}
+
+.article {
+  padding: 2rem 0;
+}
+
+.h1 {
   font-size: 2rem;
   text-align: center;
   padding: 2rem 0;
   font-family: Comic_CAT;
-}
-
-.description {
-  font-family: AvertaDemoPE;
-  font-size: 1.25rem;
-  padding: 0 3rem;
-  text-align: center;
 }
 
 article:nth-child(even) .update_text {
@@ -50,17 +50,4 @@ article:nth-child(odd) .update_text {
 article:nth-child(odd) .update_author {
   font-family: AvertaDemoPE;
   text-align-last: left;
-}
-
-.article {
-  padding: 2rem 0;
-}
-
-.alt_link {
-  display: block;
-  text-decoration: underline;
-  font-family: Comic_CAT;
-  font-size: 1.5rem;
-  padding: 1rem 0 2rem 0;
-  text-align: center;
 }

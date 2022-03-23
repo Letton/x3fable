@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../../styles/Header.module.css";
+import styles from "../styles/Header.module.css";
 
 export default function Header() {
   return (
@@ -12,7 +12,7 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link href="/about">
+            <Link href="https://wiki-js-x3fable.herokuapp.com">
               <a>Wiki</a>
             </Link>
           </li>

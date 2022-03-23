@@ -1,21 +1,24 @@
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import Layout from "./components/Layout";
-import Header from "./components/Header";
+import Layout from "../components/Layout";
+import Header from "../components/Header";
 import screenshot_1 from "../public/img/screenshot_1.jpg";
 import screenshot_2 from "../public/img/screenshot_2.jpg";
 import screenshot_3 from "../public/img/screenshot_3.jpg";
-
+import fetchJson from "../lib/fetchJson";
+import { marked } from "marked";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import Link from "next/link";
 
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 import "swiper/css";
+import Footer from "../components/Footer";
 
-export default function Home() {
+export default function Home({ updates }) {
   return (
     <Layout>
       <Header />
@@ -78,36 +81,74 @@ export default function Home() {
           <hr />
           <section>
             <h2 className={styles.title}>Обновления</h2>
-            <article className={styles.update_article}>
-              <h2 className={styles.update_title}>Обновление 1.0.2</h2>
-              <p className={styles.update_descrition}>
-                *здесь описание обновления, которое происходит. это может быть
-                развёрнуто, а может быть кратенько. лучше всё расписать по
-                пунктам*
-              </p>
-              <p className={styles.update_author}>
-                30.02.2032, 23:51. Автор: *admin nickname*
-              </p>
-            </article>
-            <article className={styles.update_article}>
-              <h2 className={styles.update_title}>Обновление 1.0.2</h2>
-              <p className={styles.update_descrition}>
-                *здесь описание обновления, которое происходит. это может быть
-                развёрнуто, а может быть кратенько. лучше всё расписать по
-                пунктам*
-              </p>
-              <p className={styles.update_author}>
-                30.02.2032, 23:51. Автор: *admin nickname*
-              </p>
-            </article>
+            {updates.map((update) => (
+              <article className={styles.article} key={update.id}>
+                <div
+                  className={styles.update_text}
+                  dangerouslySetInnerHTML={{ __html: update.text }}
+                ></div>
+                <p className={styles.update_author}>
+                  <span style={{ marginRight: "1rem" }}>
+                    {update.date.split("T")[0].replaceAll("-", ".")},{" "}
+                    {update.date.split("T")[1].split(".")[0]}
+                  </span>
+                  <span>Автор: {update.author}</span>
+                </p>
+              </article>
+            ))}
+            <Link href="/updates">
+              <a className={styles.alt_link}>Смотреть все обновления</a>
+            </Link>
           </section>
         </div>
       </main>
-      <footer className={styles.footer}>
-        <div className={styles.all_rights}>
-          {new Date().getFullYear()} Все права игнорированы
-        </div>
-      </footer>
+      <Footer />
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const response = await fetchJson(
+    "https://gitlab.informatics.ru/api/v4/projects/5102/repository/tree?ref=Updates",
+    {
+      method: "GET",
+      headers: {
+        "PRIVATE-TOKEN": "UCoDynxxscwQ66KadnfG",
+      },
+    }
+  );
+  const files = response.map((file) => file.name).slice(0, 2);
+  const updates = await Promise.all(
+    files.map(async (fileName) => {
+      const info = await fetchJson(
+        `https://gitlab.informatics.ru/api/v4/projects/5102/repository/files/${fileName}/blame?ref=Updates`,
+        {
+          method: "GET",
+          headers: {
+            "PRIVATE-TOKEN": "UCoDynxxscwQ66KadnfG",
+          },
+        }
+      );
+      const response = await fetch(
+        `https://gitlab.informatics.ru/api/v4/projects/5102/repository/files/${fileName}/raw?ref=Updates`,
+        {
+          method: "GET",
+          headers: {
+            "PRIVATE-TOKEN": "UCoDynxxscwQ66KadnfG",
+          },
+        }
+      );
+      const rawText = await response.text();
+      const text = marked.parse(rawText);
+      return {
+        id: info[0].commit.id,
+        author: info[0].commit.committer_name,
+        date: info[0].commit.committed_date,
+        text: text,
+      };
+    })
+  );
+  return {
+    props: { updates },
+  };
 }

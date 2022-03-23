@@ -1,0 +1,69 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.comment {
+  padding: 0.15rem 0 0 0;
+  font-family: AvertaDemoPE;
+}
+
+.comments {
+  margin-bottom: 2rem;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.commentsTitle {
+  font-size: 1.75rem;
+  font-family: Comic_CAT;
+}
+
+.commentsWrapper {
+  background: #483012;
+  border: 5px solid #160d04;
+  padding: 1rem 1rem;
+}
+
+.label {
+  display: block;
+  font-family: AvertaDemoPE;
+}
+
+.input {
+  display: block;
+  padding: 0.4rem;
+  border: none;
+  outline: none;
+  background: #36240e;
+  color: #ecc981;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  width: calc(100% - 250px);
+  font-family: AvertaDemoPE;
+}
+
+.button:active {
+  background-color: #69461b;
+}
+
+.button {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-family: AvertaDemoPE;
+  background: #36240e;
+  color: #ecc981;
+  border: none;
+  font-size: 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.alt_link {
+  display: block;
+  width: 100%;
+  text-align: right;
+  text-decoration: underline;
+}

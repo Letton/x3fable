@@ -42,3 +42,15 @@ hr {
 section {
   overflow: auto;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #160d04;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e3b152;
+}
