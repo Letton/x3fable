@@ -46,11 +46,11 @@ export async function getServerSideProps() {
     {
       method: "GET",
       headers: {
-        "PRIVATE-TOKEN": "UCoDynxxscwQ66KadnfG",
+        "PRIVATE-TOKEN": process.env.GITLAB_TOKEN,
       },
     }
   );
-  const files = response.map((file) => file.name);
+  const files = response.map((file) => file.name).reverse();
   const updates = await Promise.all(
     files.map(async (fileName) => {
       const info = await fetchJson(
@@ -58,7 +58,7 @@ export async function getServerSideProps() {
         {
           method: "GET",
           headers: {
-            "PRIVATE-TOKEN": "UCoDynxxscwQ66KadnfG",
+            "PRIVATE-TOKEN": process.env.GITLAB_TOKEN,
           },
         }
       );
@@ -67,7 +67,7 @@ export async function getServerSideProps() {
         {
           method: "GET",
           headers: {
-            "PRIVATE-TOKEN": "UCoDynxxscwQ66KadnfG",
+            "PRIVATE-TOKEN": process.env.GITLAB_TOKEN,
           },
         }
       );

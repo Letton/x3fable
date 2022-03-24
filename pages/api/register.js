@@ -49,7 +49,14 @@ export default async function handler(req, res) {
       expiresIn: "1h",
     }
   );
-  await sendConfirmationEmail(email, token);
+  try {
+    await sendConfirmationEmail(email, token);
+  } catch {
+    return res.status(400).json({
+      status: "error",
+      message: "Не удалось отправить письмо на вашу почту",
+    });
+  }
   res.setHeader(
     "Set-Cookie",
     serialize("token", token, { path: "/", maxAge: 60 * 60 * 24 })

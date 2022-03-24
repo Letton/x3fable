@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styles from "../styles/Modal.module.css";
 
 export default function Modal({ active, setActive, title, text }) {
