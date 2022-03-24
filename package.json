@@ -1,6 +1,5 @@
 {
   "name": "next-app-with-custom-server",
-  "private": true,
   "scripts": {
     "dev": "node server.js",
     "build": "next build",

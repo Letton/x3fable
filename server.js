@@ -5,10 +5,9 @@ const { parse } = require("url");
 const sequelize = require("./db");
 const models = require("./models");
 const next = require("next");
-console.log(process.env.HOST);
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
-const port = 3000;
+const port = process.env.PORT;
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
