@@ -2,6 +2,10 @@
 
 Установите Postgres
 
+Уставноите Node
+
+`требуется хотя бы поледняя lts версия`
+
 Создайте базу данных
 
 Измените файл `.env`
@@ -38,9 +42,9 @@ yarn build
 Запустите сервер:
 
 ```sh
-npm run dev
+npm run start
 # or
-yarn dev
+yarn start
 ```
 
 Open http://localhost:3000 with your browser to see the result.
