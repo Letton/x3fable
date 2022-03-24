@@ -1,27 +1,35 @@
-# Getting Started
+# Инструкция по работе с проектом
 
-Установите Postgres
+## База данных
 
-Уставноите Node
+Установите [Postgres](https://www.postgresql.org/)
 
-`требуется хотя бы поледняя lts версия`
+С помощью [Postgres](https://www.postgresql.org/) создайте базу данных для проекта
 
-Создайте базу данных
+## Node.js
 
-Измените файл `.env`
+Уставноите [Node.js](https://nodejs.org/)
+
+> Минимальная версия [Node.js](https://nodejs.org/) - `16.14.2`
+
+## Настройка конфигурации
+
+Создайте файл `.env` или задайте переменные окружения
 
 ```sh
-NODE_ENV=development <- "Изменить на production"
-SECRET=7ytraRf7SmkqdGa6MN9KnEAWFyXm9jumue8fswVSXMXHwpsG
-DB_NAME="Название базы данных"
-DB_USER=postgres
+NODE_ENV="Для продакшн версии задайте значение - production"
+SECRET="Секретный ключ для подписи JWT"
+DB_USER="Пользователь базы данных"
 DB_PASSWORD="Пароль от базы данных"
-DB_HOST=localhost
-DB_PORT=5432
+DB_HOST="Хост базы данных, для примера - localhost"
+DB_PORT="Порт базы данных"
 GOOGLE_USER="Ваша почта"
 GOOGLE_PASSWORD="Ваш пароль от почты, сгенерированный в паролях приложений Google"
-HOST=localhost:3000
+HOST="Хост, для примера - localhost:3000"
+PORT="Порт"
 ```
+
+## Работа с проектом
 
 Установите зависимости проекта
 
@@ -31,6 +39,12 @@ npm i
 yarn
 ```
 
+### Для запуска проекта
+
+#### Запуск в production режиме
+
+> Убедитесь что переменная окружения `NODE_ENV=production`
+
 Соберите проект
 
 ```sh
@@ -39,12 +53,20 @@ npm run build
 yarn build
 ```
 
-Запустите сервер:
+Запустите проект
 
 ```sh
-npm run start
+npm run build
 # or
-yarn start
+yarn build
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+#### Запуск в development режиме
+
+```sh
+npm run dev
+# or
+yarn dev
+```
+
+Откройте http://localhost:3000 с помощью браузера, чтобы увидеть результат
