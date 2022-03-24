@@ -56,9 +56,9 @@ yarn build
 Запустите проект
 
 ```sh
-npm run build
+npm run start
 # or
-yarn build
+yarn start
 ```
 
 #### Запуск в development режиме
