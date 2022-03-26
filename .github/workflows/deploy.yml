@@ -15,4 +15,7 @@ jobs:
     runs-on: self-hosted
     
     steps:
-    - run: mkdir test
+    - run: cd /var/www/x3fable
+    - run: npm i
+    - run: npm run build
+    - run: pm2 restart server
