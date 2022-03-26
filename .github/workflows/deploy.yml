@@ -18,5 +18,4 @@ jobs:
     - run: cd /var/www/x3fable
     - run: npm i
     - run: npm run build
-    - run: export pm2_home=/root/.pm2
-    - run: pm2 restart server
+    - run: PM2_HOME=/root/.pm2 pm2 restart server
