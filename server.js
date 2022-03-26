@@ -11,7 +11,7 @@ const port = process.env.PORT;
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
-
+//test
 (async () => {
   await sequelize.authenticate();
   await sequelize.sync();
