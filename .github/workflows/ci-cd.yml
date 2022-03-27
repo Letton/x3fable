@@ -10,13 +10,27 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  update:
 
     runs-on: self-hosted
     
     steps:
     - run: cd /var/www/x3fable
     - run: git pull
+    
+  build:
+
+    runs-on: self-hosted
+    
+    steps:
+    - run: ls
+    - run: cd /var/www/x3fable
     - run: npm i
     - run: npm run build
+  
+  start:
+    
+    runs-on: self-hosted
+    
+    steps:
     - run: PM2_HOME=/root/.pm2 pm2 restart server
