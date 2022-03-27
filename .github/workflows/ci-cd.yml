@@ -21,7 +21,7 @@ jobs:
   build:
 
     runs-on: self-hosted
-    
+    needs: [update]
     steps:
     - run: ls
     - run: cd /var/www/x3fable
@@ -31,6 +31,6 @@ jobs:
   start:
     
     runs-on: self-hosted
-    
+    needs: [build]
     steps:
     - run: PM2_HOME=/root/.pm2 pm2 restart server
