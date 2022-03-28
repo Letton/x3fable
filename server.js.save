@@ -1,32 +1,23 @@
 // server.js
 require("dotenv").config();
-const { createServer } = require("https");
+const { createServer } = require("http");
 const { parse } = require("url");
 const sequelize = require("./db");
 const models = require("./models");
 const next = require("next");
-const fs = require("fs");
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
 const port = process.env.PORT;
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
-
-
-const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/letton.tech/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/letton.tech/cert.pem'),
-  ca: fs.readFileSync("/etc/letsencrypt/live/letton.tech/chain.pem")
-};
-
-
+console.log(process.env.HOST)'
 
 (async () => {
   await sequelize.authenticate();
   await sequelize.sync();
   app.prepare().then(() => {
-    createServer(options, (req, res) => {
+    createServer((req, res) => {
       // Be sure to pass `true` as the second argument to `url.parse`.
       // This tells it to parse the query portion of the URL.
       const parsedUrl = parse(req.url, true);
