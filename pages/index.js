@@ -27,7 +27,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetchJson("/api/get_update");
+      const response = await fetchJson("/api/get-update");
       setUpdate(response.update);
     }
     fetchData();

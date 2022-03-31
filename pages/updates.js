@@ -50,11 +50,12 @@ export async function getServerSideProps() {
       },
     }
   );
-  const files = response.map((file) => file.name).reverse();
+  console.log(response);
+  const files = response.reverse();
   const updates = await Promise.all(
-    files.map(async (fileName) => {
+    files.map(async ({ id, name }) => {
       const info = await fetchJson(
-        `https://gitlab.informatics.ru/api/v4/projects/5102/repository/files/${fileName}/blame?ref=Updates`,
+        `https://gitlab.informatics.ru/api/v4/projects/5102/repository/files/${name}/blame?ref=Updates`,
         {
           method: "GET",
           headers: {
@@ -63,7 +64,7 @@ export async function getServerSideProps() {
         }
       );
       const response = await fetch(
-        `https://gitlab.informatics.ru/api/v4/projects/5102/repository/files/${fileName}/raw?ref=Updates`,
+        `https://gitlab.informatics.ru/api/v4/projects/5102/repository/files/${name}/raw?ref=Updates`,
         {
           method: "GET",
           headers: {
@@ -76,7 +77,7 @@ export async function getServerSideProps() {
       const comments = JSON.stringify(
         await Commentary.findAll({
           where: {
-            updateId: info[info.length - 1].commit.id,
+            updateId: id,
           },
           include: [{ model: User, as: "user" }],
           raw: true,
@@ -84,7 +85,7 @@ export async function getServerSideProps() {
         })
       );
       return {
-        id: info[info.length - 1].commit.id,
+        id: id,
         author: info[info.length - 1].commit.committer_name,
         date: info[info.length - 1].commit.committed_date,
         text: text,
