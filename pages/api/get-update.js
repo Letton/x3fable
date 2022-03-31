@@ -11,9 +11,9 @@ export default async function handler(req, res) {
       },
     }
   );
-  const fileName = response[response.length - 1].name;
+  const file = response[response.length - 1];
   const info = await fetchJson(
-    `https://gitlab.informatics.ru/api/v4/projects/5102/repository/files/${fileName}/blame?ref=Updates`,
+    `https://gitlab.informatics.ru/api/v4/projects/5102/repository/files/${file.name}/blame?ref=Updates`,
     {
       method: "GET",
       headers: {
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     }
   );
   const textResponse = await fetch(
-    `https://gitlab.informatics.ru/api/v4/projects/5102/repository/files/${fileName}/raw?ref=Updates`,
+    `https://gitlab.informatics.ru/api/v4/projects/5102/repository/files/${file.name}/raw?ref=Updates`,
     {
       method: "GET",
       headers: {
@@ -33,9 +33,9 @@ export default async function handler(req, res) {
   const rawText = await textResponse.text();
   const text = marked.parse(rawText);
   const update = {
-    id: info[0].commit.id,
-    author: info[0].commit.committer_name,
-    date: info[0].commit.committed_date,
+    id: file.id,
+    author: info[info.length - 1].commit.committer_name,
+    date: info[info.length - 1].commit.committed_date,
     text: text,
   };
   return res.status(200).json({ update });
