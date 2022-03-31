@@ -76,7 +76,7 @@ export async function getServerSideProps() {
       const comments = JSON.stringify(
         await Commentary.findAll({
           where: {
-            updateId: info[0].commit.id,
+            updateId: info[info.length - 1].commit.id,
           },
           include: [{ model: User, as: "user" }],
           raw: true,
@@ -84,9 +84,9 @@ export async function getServerSideProps() {
         })
       );
       return {
-        id: info[0].commit.id,
-        author: info[0].commit.committer_name,
-        date: info[0].commit.committed_date,
+        id: info[info.length - 1].commit.id,
+        author: info[info.length - 1].commit.committer_name,
+        date: info[info.length - 1].commit.committed_date,
         text: text,
         comments: JSON.parse(comments),
       };
