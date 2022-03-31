@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   const user = await User.findOne({
     where: { login },
   });
-  if (!bcrypt.compareSync(password, user.password)) {
+  if (!user || !bcrypt.compareSync(password, user.password)) {
     return res.status(400).json({
       status: "error",
       message: "Неверный логин или пароль",
