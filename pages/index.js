@@ -25,9 +25,12 @@ import Loader from "../components/Lodaer";
 export default function Home() {
   const [update, setUpdate] = useState(null);
 
-  useEffect(async () => {
-    const response = await fetchJson("/api/get_update");
-    setUpdate(response.update);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetchJson("/api/get_update");
+      setUpdate(response.update);
+    }
+    fetchData();
   }, []);
 
   return (
