@@ -12,8 +12,8 @@ const Updates = ({ updates }) => {
       <Header />
       <main className={styles.main}>
         <div className="container">
-          <h1 className={styles.h1}>Обновления</h1>
           <section>
+            <h1 className={styles.h1}>Обновления</h1>
             {updates.map((update) => (
               <article className={styles.article} key={update.id}>
                 <div
