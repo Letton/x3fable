@@ -5,8 +5,10 @@ import Footer from "../components/Footer";
 import styles from "../styles/Updates.module.css";
 import { marked } from "marked";
 import Comments from "../components/Comments";
+import prisma from "../lib/prisma";
 
 const Updates = ({ updates }) => {
+  console.log(updates);
   return (
     <Layout>
       <Header />
@@ -40,7 +42,6 @@ const Updates = ({ updates }) => {
 };
 
 export async function getServerSideProps() {
-  const { Commentary, User } = require("../models");
   const response = await fetchJson(
     "https://gitlab.informatics.ru/api/v4/projects/5102/repository/tree?ref=Updates",
     {
@@ -74,22 +75,31 @@ export async function getServerSideProps() {
       );
       const rawText = await response.text();
       const text = marked.parse(rawText);
-      const comments = JSON.stringify(
-        await Commentary.findAll({
-          where: {
-            updateId: id,
+      const comments = await prisma.commentary.findMany({
+        where: {
+          updateId: id,
+        },
+        include: {
+          user: {
+            select: {
+              login: true,
+            },
           },
-          include: [{ model: User, as: "user" }],
-          raw: true,
-          nest: true,
-        })
-      );
+        },
+      });
+      console.dir(comments);
       return {
         id: id,
         author: info[info.length - 1].commit.committer_name,
         date: info[info.length - 1].commit.committed_date,
         text: text,
-        comments: JSON.parse(comments),
+        comments: comments.map((comment) => {
+          return {
+            ...comment,
+            createdAt: comment.createdAt.toString(),
+            updatedAt: comment.updatedAt.toString(),
+          };
+        }),
       };
     })
   );

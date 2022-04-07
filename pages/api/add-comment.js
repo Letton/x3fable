@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { Commentary } from "../../models";
+import prisma from "../../lib/prisma";
 
 export default async function handler(req, res) {
   const { commentText, updateId } = req.body;
@@ -18,12 +18,18 @@ export default async function handler(req, res) {
       message: "Авторизируйтесь, чтобы добавить комментарий",
     });
   }
-  const commentCandidate = await Commentary.findOne({
+  const commentCandidate = await prisma.commentary.findFirst({
     where: {
       userId: user.id,
     },
-    order: [["updatedAt", "DESC"]],
+    orderBy: {
+      updatedAt: "desc",
+    },
+    select: {
+      updatedAt: true,
+    },
   });
+  console.log(commentCandidate);
   if (
     commentCandidate &&
     commentCandidate.updatedAt.getTime() + 60 * 1000 > Date.now()
@@ -33,10 +39,12 @@ export default async function handler(req, res) {
       message: "Вы можете осталять комментарий раз в минуту",
     });
   }
-  const comment = await Commentary.create({
-    text: commentText,
-    updateId: updateId,
-    userId: user.id,
+  const comment = await prisma.commentary.create({
+    data: {
+      text: commentText,
+      updateId: updateId,
+      userId: user.id,
+    },
   });
   return res.status(200).json({ status: "ok" });
 }

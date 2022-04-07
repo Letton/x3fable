@@ -1,9 +1,7 @@
 import { serialize } from "cookie";
 import jwt from "jsonwebtoken";
-import { User, PendingUser } from "../../models";
 import bcrypt from "bcrypt";
-const { Sequelize } = require("sequelize");
-const Op = Sequelize.Op;
+import prisma from "../../lib/prisma";
 import { sendConfirmationEmail } from "../../lib/mailer";
 
 const validateEmail = (email) => {
@@ -32,8 +30,8 @@ export default async function handler(req, res) {
       message: "Пароль должен быть длиннее 8 символов",
     });
   }
-  const userCandidate = await User.findOne({
-    where: { [Op.or]: [{ email: email }, { login: login }] },
+  const userCandidate = await prisma.user.findFirst({
+    where: { OR: [{ email: email }, { login: login }] },
   });
   if (userCandidate) {
     return res.status(400).json({

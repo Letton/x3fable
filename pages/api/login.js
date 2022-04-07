@@ -1,6 +1,6 @@
 import { serialize } from "cookie";
 import jwt from "jsonwebtoken";
-import { User } from "../../models";
+import prisma from "../../lib/prisma";
 import bcrypt from "bcrypt";
 
 export default async function handler(req, res) {
@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       message: "Невалидные данные",
     });
   }
-  const user = await User.findOne({
+  const user = await prisma.user.findUnique({
     where: { login },
   });
   if (!user || !bcrypt.compareSync(password, user.password)) {
