@@ -1,22 +1,16 @@
-// server.js
 require("dotenv").config();
 const http = require("http");
 const https = require("https");
 const { parse } = require("url");
-const sequelize = require("./db");
-const models = require("./models");
 const next = require("next");
 const fs = require("fs");
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
 const port = process.env.PORT;
-// when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
 (async () => {
-  await sequelize.authenticate();
-  await sequelize.sync();
   app.prepare().then(() => {
     if (process.env.NODE_ENV === "production") {
       const options = {
@@ -26,8 +20,6 @@ const handle = app.getRequestHandler();
       };
       https
         .createServer(options, (req, res) => {
-          // Be sure to pass `true` as the second argument to `url.parse`.
-          // This tells it to parse the query portion of the URL.
           const parsedUrl = parse(req.url, true);
           handle(req, res, parsedUrl);
         })
@@ -38,8 +30,6 @@ const handle = app.getRequestHandler();
     } else {
       http
         .createServer((req, res) => {
-          // Be sure to pass `true` as the second argument to `url.parse`.
-          // This tells it to parse the query portion of the URL.
           const parsedUrl = parse(req.url, true);
           handle(req, res, parsedUrl);
         })
