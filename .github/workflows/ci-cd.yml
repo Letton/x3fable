@@ -23,6 +23,7 @@ jobs:
     steps:
     - run: cd /var/www/x3fable
     - run: npm i
+    - run: npx prisma migrate deploy
     - run: npm run build
 
   start:
