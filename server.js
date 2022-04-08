@@ -19,9 +19,9 @@ const handle = app.getRequestHandler();
         ca: fs.readFileSync("/etc/letsencrypt/live/letton.tech/chain.pem"),
       };
       https
-        .createServer(options, (req, res) => {
+        .createServer(options, async (req, res) => {
           const parsedUrl = parse(req.url, true);
-          handle(req, res, parsedUrl);
+          await handle(req, res, parsedUrl);
         })
         .listen(port, (err) => {
           if (err) throw err;
@@ -29,9 +29,9 @@ const handle = app.getRequestHandler();
         });
     } else {
       http
-        .createServer((req, res) => {
+        .createServer(async (req, res) => {
           const parsedUrl = parse(req.url, true);
-          handle(req, res, parsedUrl);
+          await handle(req, res, parsedUrl);
         })
         .listen(port, (err) => {
           if (err) throw err;
