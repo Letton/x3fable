@@ -6,6 +6,7 @@ import screenshot_1 from "../public/img/screenshot_1.jpg";
 import screenshot_2 from "../public/img/screenshot_2.jpg";
 import screenshot_3 from "../public/img/screenshot_3.jpg";
 import fetchJson from "../lib/fetchJson";
+import ModalImage from "../components/ModalImage";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
@@ -24,6 +25,10 @@ import Loader from "../components/Lodaer";
 
 export default function Home() {
   const [update, setUpdate] = useState(null);
+
+  const [active1, setActive1] = useState(false);
+  const [active2, setActive2] = useState(false);
+  const [active3, setActive3] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -49,6 +54,39 @@ export default function Home() {
             </p>
           </section>
           <hr />
+          <ModalImage
+            src={screenshot_1}
+            alt="Screenshot"
+            width={1920}
+            height={1080}
+            layout="fill"
+            unoptimized
+            placeholder="blur"
+            active={active1}
+            setActive={setActive1}
+          ></ModalImage>
+          <ModalImage
+            src={screenshot_2}
+            alt="Screenshot"
+            width={1920}
+            height={1080}
+            layout="fill"
+            unoptimized
+            placeholder="blur"
+            active={active2}
+            setActive={setActive2}
+          ></ModalImage>
+          <ModalImage
+            src={screenshot_3}
+            alt="Screenshot"
+            width={1920}
+            height={1080}
+            layout="fill"
+            unoptimized
+            placeholder="blur"
+            active={active3}
+            setActive={setActive3}
+          ></ModalImage>
           <section className="">
             <h2 className={styles.title}>Скриншоты</h2>
             <Swiper
@@ -66,6 +104,7 @@ export default function Home() {
                   layout="responsive"
                   unoptimized
                   placeholder="blur"
+                  onClick={() => setActive1(true)}
                 ></Image>
               </SwiperSlide>
               <SwiperSlide>
@@ -77,6 +116,7 @@ export default function Home() {
                   layout="responsive"
                   unoptimized
                   placeholder="blur"
+                  onClick={() => setActive2(true)}
                 ></Image>
               </SwiperSlide>
               <SwiperSlide>
@@ -88,6 +128,7 @@ export default function Home() {
                   layout="responsive"
                   unoptimized
                   placeholder="blur"
+                  onClick={() => setActive3(true)}
                 ></Image>
               </SwiperSlide>
             </Swiper>

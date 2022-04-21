@@ -1,0 +1,36 @@
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal_content {
+  position: relative;
+  width: auto;
+  height: 80vh;
+}
+
+.custom-img {
+  object-fit: contain;
+  width: 80vw !important;
+  position: relative !important;
+  height: unset !important;
+}
+
+.unset-img {
+  width: 80vw;
+}
+.unset-img > div {
+  position: unset !important;
+}
