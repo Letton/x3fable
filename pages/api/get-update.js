@@ -1,7 +1,13 @@
 import fetchJson from "../../lib/fetchJson";
 import { marked } from "marked";
+import redis from "../../lib/redis";
 
 export default async function handler(req, res) {
+  let update = redis.get("update");
+  if (update) {
+    update = JSON.parse(update);
+    return res.status(200).json({ update });
+  }
   const response = await fetchJson(
     "https://gitlab.informatics.ru/api/v4/projects/5102/repository/tree?ref=Updates",
     {
@@ -32,7 +38,7 @@ export default async function handler(req, res) {
   );
   const rawText = await textResponse.text();
   const text = marked.parse(rawText);
-  const update = {
+  update = {
     id: file.id,
     author: info[info.length - 1].commit.committer_name,
     date: info[info.length - 1].commit.committed_date,
