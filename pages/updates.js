@@ -70,7 +70,6 @@ export async function getServerSideProps() {
         };
       })
     );
-    console.log(updates);
     return {
       props: { updates },
     };
