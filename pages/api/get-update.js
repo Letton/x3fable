@@ -3,7 +3,7 @@ import { marked } from "marked";
 import redis from "../../lib/redis";
 
 export default async function handler(req, res) {
-  let update = redis.get("update");
+  let update = await redis.get("update");
   if (update) {
     update = JSON.parse(update);
     return res.status(200).json({ update });
@@ -44,5 +44,6 @@ export default async function handler(req, res) {
     date: info[info.length - 1].commit.committed_date,
     text: text,
   };
+  await redis.setex("update", 60 * 60, JSON.stringify(update));
   return res.status(200).json({ update });
 }
