@@ -115,30 +115,32 @@ export async function getServerSideProps() {
     })
   );
   redis.setex("updates", 60 * 60, JSON.stringify(updates));
-  updates.map(async (update) => {
-    const comments = await prisma.commentary.findMany({
-      where: {
-        updateId: update.id,
-      },
-      include: {
-        user: {
-          select: {
-            login: true,
+  updates = await Promise.all(
+    updates.map(async (update) => {
+      const comments = await prisma.commentary.findMany({
+        where: {
+          updateId: update.id,
+        },
+        include: {
+          user: {
+            select: {
+              login: true,
+            },
           },
         },
-      },
-    });
-    return {
-      ...update,
-      comments: comments.map((comment) => {
-        return {
-          ...comment,
-          createdAt: comment.createdAt.toString(),
-          updatedAt: comment.updatedAt.toString(),
-        };
-      }),
-    };
-  });
+      });
+      return {
+        ...update,
+        comments: comments.map((comment) => {
+          return {
+            ...comment,
+            createdAt: comment.createdAt.toString(),
+            updatedAt: comment.updatedAt.toString(),
+          };
+        }),
+      };
+    })
+  );
   return {
     props: { updates },
   };
