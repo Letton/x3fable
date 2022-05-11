@@ -6,7 +6,7 @@ import styles from "../styles/Updates.module.css";
 import { marked } from "marked";
 import Comments from "../components/Comments";
 import prisma from "../lib/prisma";
-
+import redis from "../lib/redis";
 const Updates = ({ updates }) => {
   console.log(updates);
   return (
@@ -42,6 +42,13 @@ const Updates = ({ updates }) => {
 };
 
 export async function getServerSideProps() {
+  let updates = await redis.get("updates");
+  if (updates) {
+    updates = JSON.parse(updates);
+    return {
+      props: { updates },
+    };
+  }
   const response = await fetchJson(
     "https://gitlab.informatics.ru/api/v4/projects/5102/repository/tree?ref=Updates",
     {
@@ -51,9 +58,8 @@ export async function getServerSideProps() {
       },
     }
   );
-  console.log(response);
   const files = response.reverse();
-  const updates = await Promise.all(
+  updates = await Promise.all(
     files.map(async ({ id, name }) => {
       const info = await fetchJson(
         `https://gitlab.informatics.ru/api/v4/projects/5102/repository/files/${name}/blame?ref=Updates`,
@@ -87,7 +93,6 @@ export async function getServerSideProps() {
           },
         },
       });
-      console.dir(comments);
       return {
         id: id,
         author: info[info.length - 1].commit.committer_name,
@@ -103,6 +108,7 @@ export async function getServerSideProps() {
       };
     })
   );
+  redis.setex("updates", 60 * 60, JSON.stringify(updates));
   return {
     props: { updates },
   };
