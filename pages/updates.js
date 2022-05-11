@@ -8,7 +8,6 @@ import Comments from "../components/Comments";
 import prisma from "../lib/prisma";
 import redis from "../lib/redis";
 const Updates = ({ updates }) => {
-  console.log(updates);
   return (
     <Layout>
       <Header />
@@ -45,6 +44,33 @@ export async function getServerSideProps() {
   let updates = await redis.get("updates");
   if (updates) {
     updates = JSON.parse(updates);
+    updates = await Promise.all(
+      updates.map(async (update) => {
+        const comments = await prisma.commentary.findMany({
+          where: {
+            updateId: update.id,
+          },
+          include: {
+            user: {
+              select: {
+                login: true,
+              },
+            },
+          },
+        });
+        return {
+          ...update,
+          comments: comments.map((comment) => {
+            return {
+              ...comment,
+              createdAt: comment.createdAt.toString(),
+              updatedAt: comment.updatedAt.toString(),
+            };
+          }),
+        };
+      })
+    );
+    console.log(updates);
     return {
       props: { updates },
     };
@@ -81,34 +107,39 @@ export async function getServerSideProps() {
       );
       const rawText = await response.text();
       const text = marked.parse(rawText);
-      const comments = await prisma.commentary.findMany({
-        where: {
-          updateId: id,
-        },
-        include: {
-          user: {
-            select: {
-              login: true,
-            },
-          },
-        },
-      });
       return {
         id: id,
         author: info[info.length - 1].commit.committer_name,
         date: info[info.length - 1].commit.committed_date,
         text: text,
-        comments: comments.map((comment) => {
-          return {
-            ...comment,
-            createdAt: comment.createdAt.toString(),
-            updatedAt: comment.updatedAt.toString(),
-          };
-        }),
       };
     })
   );
   redis.setex("updates", 60 * 60, JSON.stringify(updates));
+  updates.map(async (update) => {
+    const comments = await prisma.commentary.findMany({
+      where: {
+        updateId: update.id,
+      },
+      include: {
+        user: {
+          select: {
+            login: true,
+          },
+        },
+      },
+    });
+    return {
+      ...update,
+      comments: comments.map((comment) => {
+        return {
+          ...comment,
+          createdAt: comment.createdAt.toString(),
+          updatedAt: comment.updatedAt.toString(),
+        };
+      }),
+    };
+  });
   return {
     props: { updates },
   };
