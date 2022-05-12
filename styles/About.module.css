@@ -12,6 +12,13 @@
   font-family: Comic_CAT;
 }
 
+.title_2 {
+  font-size: 2rem;
+  text-align: center;
+  padding: 2rem 0;
+  font-family: Comic_CAT;
+}
+
 .description {
   font-family: AvertaDemoPE;
   font-size: 1.25rem;
