@@ -12,8 +12,8 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link href="https://wiki-js-x3fable.herokuapp.com">
-              <a>Wiki</a>
+            <Link href="/about">
+              <a>Об игре</a>
             </Link>
           </li>
           <li>
@@ -24,8 +24,8 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link href="/about">
-              <a>Об игре</a>
+            <Link href="/downloads/Game.zip">
+              <a>Скачать</a>
             </Link>
           </li>
           <li>
