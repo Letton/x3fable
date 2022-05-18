@@ -4,12 +4,12 @@ import { useState, useRef, useCallback, useEffect } from "react";
 export default function Secret_easter_egg() {
   const [text, setText] = useState("Нажми на меня!");
   const jsConfettiRef = useRef();
-  const texts = ["Ты солнышко", "Ты зайка", "Ты умничка", "Ты золотце"];
   useEffect(() => {
     jsConfettiRef.current = new JSConfetti();
   }, []);
 
   const handleClick = useCallback(() => {
+    const texts = ["Ты солнышко", "Ты зайка", "Ты умничка", "Ты золотце"];
     if (jsConfettiRef.current) {
       jsConfettiRef.current
         .addConfetti({
@@ -27,7 +27,7 @@ export default function Secret_easter_egg() {
       console.log(Math.floor(Math.random() * texts.length));
       setText(texts[Math.floor(Math.random() * texts.length)]);
     }
-  }, [jsConfettiRef, texts]);
+  }, [jsConfettiRef]);
 
   return (
     <div
