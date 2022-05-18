@@ -1,11 +1,29 @@
 import Link from "next/link";
 import styles from "../styles/Header.module.css";
+import { useRef } from "react";
 
 export default function Header() {
+  const ulRef = useRef(null);
+  const isOpen = useRef(false);
+
+  const menuHandler = () => {
+    if (!isOpen.current) {
+      ulRef.current.style.left = "0";
+      isOpen.current = true;
+      console.log(isOpen.current);
+    } else {
+      ulRef.current.style.left = "-100%";
+      isOpen.current = false;
+    }
+  };
+
   return (
     <header className={styles.header}>
       <nav className={styles.navBar}>
-        <ul>
+        <div className={styles.menu_button}>
+          <i className="uil uil-bars" onClick={menuHandler}></i>
+        </div>
+        <ul ref={ulRef}>
           <li>
             <Link href="/updates">
               <a>Обновления</a>
