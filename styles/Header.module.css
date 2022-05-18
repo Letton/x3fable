@@ -4,6 +4,10 @@
   padding: 1rem 0;
 }
 
+.mobile_logo {
+  display: none;
+}
+
 .navBar {
   list-style: none;
   padding: 0;
@@ -41,8 +45,24 @@
 }
 
 @media (max-width: 768px) {
+  .logo {
+    display: none;
+  }
+
+  .mobile_logo {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: max-content;
+    height: max-content;
+    margin: 0 auto;
+  }
+
   .menu_button {
     display: block;
+    cursor: pointer;
   }
 
   .navBar {
@@ -66,7 +86,7 @@
     top: 69px;
     padding: 1rem 0;
     left: -100%;
-    transition: 0.25s;
+    transition: left 0.25s;
   }
 
   .navBar li {

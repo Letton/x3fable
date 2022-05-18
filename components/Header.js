@@ -23,6 +23,13 @@ export default function Header() {
         <div className={styles.menu_button}>
           <i className="uil uil-bars" onClick={menuHandler}></i>
         </div>
+        <div className={styles.mobile_logo}>
+          <Link href="/">
+            <a>
+              <h1>X3Fable</h1>
+            </a>
+          </Link>
+        </div>
         <ul ref={ulRef}>
           <li>
             <Link href="/updates">
@@ -34,7 +41,7 @@ export default function Header() {
               <a>Об игре</a>
             </Link>
           </li>
-          <li>
+          <li className={styles.logo}>
             <Link href="/">
               <a>
                 <h1>X3Fable</h1>
