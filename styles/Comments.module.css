@@ -67,3 +67,18 @@
   text-align: right;
   text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+  .form {
+    flex-direction: column;
+  }
+
+  .label {
+    padding: 0 0 1rem 0;
+  }
+
+  .input {
+    width: calc(100%);
+    margin-bottom: 1rem;
+  }
+}
