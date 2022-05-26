@@ -74,6 +74,9 @@ export default function Login() {
             <button type="submit" className={styles.button}>
               Войти
             </button>
+            <a className={styles.alt_link} href="mailto:anisimovf94@gmail.com">
+              Забыли пароль?
+            </a>
             <Link href="/account/register">
               <a className={styles.alt_link}>Зарегистрироваться</a>
             </Link>
